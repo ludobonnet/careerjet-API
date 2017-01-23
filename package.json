@@ -1,0 +1,19 @@
+{
+  "name": "careerjet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://ludobonnet@github.com/ludobonnet/careerjet-API.git"
+  },
+  "author": "Ludovic Bonnet <ludovic@bonnet.pro> (http://bonnet.pro)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ludobonnet/careerjet-API/issues"
+  },
+  "homepage": "https://github.com/ludobonnet/careerjet-API#readme"
+}
