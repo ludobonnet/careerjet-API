@@ -1,19 +1,31 @@
 {
   "name": "careerjet",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --reporter spec"
   },
   "repository": {
     "type": "git",
     "url": "git+https://ludobonnet@github.com/ludobonnet/careerjet-API.git"
   },
   "author": "Ludovic Bonnet <ludovic@bonnet.pro> (http://bonnet.pro)",
-  "license": "ISC",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/brentertz/scapegoat/blob/master/LICENSE-MIT"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/ludobonnet/careerjet-API/issues"
   },
-  "homepage": "https://github.com/ludobonnet/careerjet-API#readme"
+  "homepage": "https://github.com/ludobonnet/careerjet-API#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  },
+  "dependencies": {
+    "unirest": "^0.5.1"
+  }
 }
