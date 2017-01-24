@@ -1,9 +1,9 @@
 var careerjet = require('./index.js');
 
-const careerjetAPI = new careerjet('fr_FR', '55852348c0af7b801aecda6becb8fdf3');
+const careerjetAPI = new careerjet('en_GB', 'youraffidkey');
 
 careerjetAPI
-    .location('Vaucluse')
+    .location('London')
     .page(2)
     .sortBy('date')
     .query(
