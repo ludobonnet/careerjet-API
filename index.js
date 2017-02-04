@@ -5,7 +5,7 @@ const unirest = require('unirest');
 const missingLocale = "locale is mandatory";
 const missingAffid = "Affiliate ID (affid) is mandatory";
 
-var url = 'http://public.api.careerjet.net/search?locale_code=';
+const careerjetUrl = 'http://public.api.careerjet.net/search?locale_code=';
 
 /**
  * [Careerjet description]
@@ -16,16 +16,16 @@ const Careerjet = module.exports = function(locale, affid) {
     if (typeof locale !== 'string') throw missingLocale;
     if (typeof affid !== 'string') throw missingAffid;
 
-    url += locale;
+    const url = careerjetUrl + locale;
 
     const query = {
         // The following parameter is mandatory:
-    		affid : affid,  //  Affiliate ID provided by Careerjet. Requires to open a Careerjet partner account. http://www.careerjet.com/partners/
+    	affid : affid,  //  Affiliate ID provided by Careerjet. Requires to open a Careerjet partner account. http://www.careerjet.com/partners/
         // keywords : '',  //  Keywords to search in job offers. Example: 'java manager'. Default: none (Returns all offers from default country)
         // location : '',  //  Location to search job offers in. Examples: 'London', 'Paris'. Default: none (Returns all offers from default country)
         sort : 'relevance',  // Type of sort. Available values are 'relevance' (default), 'date', and 'salary'.
         start_num : 1, //  Num of first offer returned in entire result space should be >= 1 and <= Number of hits. Default: 1
-        pagesize: 20, //Number of offers returned in one call. Default: 20
+        pagesize: 20, //Number of offers returned in one call. Default: 20. Max: 99.
         // page: 1, // Current page number (should be >=1). If set, will override start_num. The maxumum number of page is given by $result->pages
         // contracttype: '', // Character code for contract types:<br>
         // *    'p'    - permanent job<br>
@@ -147,7 +147,7 @@ const Careerjet = module.exports = function(locale, affid) {
               if (response.error) {
                   return rejected(response.error);
               }
-              resolved(response.body);
+              resolved(JSON.parse(response.body));
           });
       }
     };
