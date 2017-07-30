@@ -1,6 +1,6 @@
 'use strict';
 
-const unirest = require('unirest');
+const request = require('request');
 
 const missingLocale = "locale is mandatory";
 const missingAffid = "Affiliate ID (affid) is mandatory";
@@ -20,7 +20,7 @@ const Careerjet = module.exports = function(locale, affid) {
 
     const query = {
         // The following parameter is mandatory:
-    	affid : affid,  //  Affiliate ID provided by Careerjet. Requires to open a Careerjet partner account. http://www.careerjet.com/partners/
+    	  affid : affid,  //  Affiliate ID provided by Careerjet. Requires to open a Careerjet partner account. http://www.careerjet.com/partners/
         // keywords : '',  //  Keywords to search in job offers. Example: 'java manager'. Default: none (Returns all offers from default country)
         // location : '',  //  Location to search job offers in. Examples: 'London', 'Paris'. Default: none (Returns all offers from default country)
         sort : 'relevance',  // Type of sort. Available values are 'relevance' (default), 'date', and 'salary'.
@@ -141,13 +141,9 @@ const Careerjet = module.exports = function(locale, affid) {
     {
       if(validateRequiredFields())
       {
-          unirest.get(url)
-          .query(query)
-          .end(function (response) {
-              if (response.error) {
-                  return rejected(response.error);
-              }
-              resolved(JSON.parse(response.body));
+          request.get(url, {'qs': query}, (err, response, body) => {
+            if (err) { return rejected(err); }
+            resolved(JSON.parse(body));
           });
       }
     };
