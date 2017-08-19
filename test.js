@@ -4,6 +4,7 @@ const careerjetAPI = new careerjet('en_GB', 'youraffidkey');
 
 careerjetAPI
     .location('London')
+    .radius(1)
     .page(2)
     .sortBy('date')
     .query(

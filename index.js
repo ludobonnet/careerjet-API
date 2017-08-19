@@ -104,6 +104,20 @@ const Careerjet = module.exports = function(locale, affid) {
     };
 
     /**
+     * [radius description]
+     * @param  {integer} radius
+     * @return {object}
+     */
+    this.radius = function (radius) {
+    	if (isNumeric(radius))
+    		query.radius = radius;
+    	else
+    		throw "Radius must be a numeric value!";
+
+    	return this;
+    };
+
+    /**
      * [start description]
      * @param  {interger} index
      * @return {object}
