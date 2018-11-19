@@ -1,7 +1,9 @@
 const request = require('request');
 
-const missingLocale = 'locale is mandatory';
+const missingLocale = 'Locale is mandatory';
 const missingAffid = 'Affiliate ID (affid) is mandatory';
+const missingUserIp = 'User IP is mandatory';
+const missingUserAgent = 'User agent is mandatory';
 
 const careerjetUrl = 'http://public.api.careerjet.net/search?locale_code=';
 
@@ -9,16 +11,22 @@ const careerjetUrl = 'http://public.api.careerjet.net/search?locale_code=';
  * [Careerjet description]
  * @param  {string} locale
  * @param  {string} affid / Affiliate ID provided by Careerjet. Requires to open a Careerjet partner account. http://www.careerjet.com/partners/
+ * @param  {string} userIp
+ * @param  {string} userAgent
  */
-module.exports = function (locale, affid) {
+module.exports = function (locale, affid, userIp, userAgent) {
   if (typeof locale !== 'string') throw missingLocale;
   if (typeof affid !== 'string') throw missingAffid;
+  if (typeof userIp !== 'string') throw missingUserIp;
+  if (typeof userAgent !== 'string') throw missingUserAgent;
 
   const url = careerjetUrl + locale;
 
   const query = {
     // The following parameter is mandatory:
-	  affid : affid, //  Affiliate ID provided by Careerjet. Requires to open a Careerjet partner account. http://www.careerjet.com/partners/
+    affid: affid, //  Affiliate ID provided by Careerjet. Requires to open a Careerjet partner account. http://www.careerjet.com/partners/
+    user_ip: userIp, // e.g, request.connection.remoteAddress
+    user_agent: userAgent, // e.g, request.header['user-agent'] 
     // keywords : '', //  Keywords to search in job offers. Example: 'java manager'. Default: none (Returns all offers from default country)
     // location : '', //  Location to search job offers in. Examples: 'London', 'Paris'. Default: none (Returns all offers from default country)
     sort : 'relevance', // Type of sort. Available values are 'relevance' (default), 'date', and 'salary'.
@@ -89,7 +97,7 @@ module.exports = function (locale, affid) {
 
   /**
    * [pagesize description]
-   * @param  {integer} pagesize
+   * @param  {number} pagesize
    * @return {object}
    */
   this.pagesize = function (pagesize) {
@@ -100,7 +108,7 @@ module.exports = function (locale, affid) {
 
   /**
    * [radius description]
-   * @param  {integer} radius
+   * @param  {number} radius
    * @return {object}
    */
   this.radius = function (radius) {
@@ -111,7 +119,7 @@ module.exports = function (locale, affid) {
 
   /**
    * [start description]
-   * @param  {interger} index
+   * @param  {number} index
    * @return {object}
    */
   this.start = function (index) {
@@ -123,7 +131,7 @@ module.exports = function (locale, affid) {
 
   /**
    * [page description]
-   * @param  {integer} index
+   * @param  {number} index
    * @return {object}
    */
   this.page = function (index) {
