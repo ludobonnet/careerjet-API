@@ -2,6 +2,7 @@ const request = require('request');
 
 const missingLocale = 'locale is mandatory';
 const missingAffid = 'Affiliate ID (affid) is mandatory';
+const missingUserID = 'User IP and User Agent are mandatory';
 
 const careerjetUrl = 'http://public.api.careerjet.net/search?locale_code=';
 
@@ -10,15 +11,28 @@ const careerjetUrl = 'http://public.api.careerjet.net/search?locale_code=';
  * @param  {string} locale
  * @param  {string} affid / Affiliate ID provided by Careerjet. Requires to open a Careerjet partner account. http://www.careerjet.com/partners/
  */
-module.exports = function (locale, affid) {
+module.exports = function () {
+
+  var params = {}
+
+  if (arguments.length == 2) {
+    params = { locale: arguments[0], affid: arguments[1]}
+  } else if (arguments.length == 1 && typeof arguments[0] === "object" ) {
+    params = arguments[0]
+  }
+  const { locale, affid, user_ip, user_agent } = params
+
   if (typeof locale !== 'string') throw missingLocale;
   if (typeof affid !== 'string') throw missingAffid;
+  if (typeof user_ip !== 'string' || typeof user_agent !== 'string') throw missingUserID;
 
   const url = careerjetUrl + locale;
 
   const query = {
     // The following parameter is mandatory:
-	  affid : affid, //  Affiliate ID provided by Careerjet. Requires to open a Careerjet partner account. http://www.careerjet.com/partners/
+    affid, //  Affiliate ID provided by Careerjet. Requires to open a Careerjet partner account. http://www.careerjet.com/partners/
+    user_ip,
+    user_agent,
     // keywords : '', //  Keywords to search in job offers. Example: 'java manager'. Default: none (Returns all offers from default country)
     // location : '', //  Location to search job offers in. Examples: 'London', 'Paris'. Default: none (Returns all offers from default country)
     sort : 'relevance', // Type of sort. Available values are 'relevance' (default), 'date', and 'salary'.

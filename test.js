@@ -1,6 +1,6 @@
 var careerjet = require('./index.js');
 
-const careerjetAPI = new careerjet('en_GB', 'youraffidkey');
+const careerjetAPI = new careerjet({locale:'en_GB', affid: 'youraffidkey', user_ip: '127.0.0.1', user_agent: 'internetexplorer'});
 
 careerjetAPI
     .location('London')
