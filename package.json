@@ -1,6 +1,6 @@
 {
   "name": "careerjet",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,10 +22,10 @@
   },
   "homepage": "https://github.com/ludobonnet/careerjet-API#readme",
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2"
   },
   "dependencies": {
-    "request": "^2.81.0"
+    "request": "^2.88.0"
   }
 }
