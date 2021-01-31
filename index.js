@@ -20,7 +20,7 @@ module.exports = function () {
   } else if (arguments.length == 1 && typeof arguments[0] === "object" ) {
     params = arguments[0]
   }
-  const { locale, affid, user_ip, user_agent } = params
+  const { locale, affid, user_ip, user_agent } = params;
 
   if (typeof locale !== 'string') throw missingLocale;
   if (typeof affid !== 'string') throw missingAffid;
@@ -62,6 +62,21 @@ module.exports = function () {
       query.keywords = keywords;
     } else {
       throw 'keywords must be a string!';
+    }
+
+    return this;
+  };
+
+  /**
+   * Set Contract Type
+   * @param  {string} contracttype
+   * @return {object}
+   */
+  this.contractType = function (contractType) {
+    if (typeof contractType === 'string') {
+      query.contracttype = contractType;
+    } else {
+      throw 'contract type must be a string';
     }
 
     return this;
