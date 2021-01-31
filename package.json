@@ -23,6 +23,7 @@
   "homepage": "https://github.com/ludobonnet/careerjet-API#readme",
   "devDependencies": {
     "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
     "mocha": "^6.0.2"
   },
   "dependencies": {
